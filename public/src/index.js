@@ -5,13 +5,21 @@
 import NewEntry from './components/newentry';
 import TodoList from './components/todolist'
 
-var apiUrl = __dirname + 'api/todos/test';
+// var apiUrl = __dirname + 'api/todos/test';
 
-// get api
+// // get api
 
-$.getJSON(apiUrl, function(data) {
-  console.log(data)
-})
+// $.ajax({
+//   url: apiUrl,
+//   type: 'GET',
+//   contentType: 'application/json',
+//   success: function(data) {
+//     console.log(data)
+//   },
+//   error: function() {
+
+//   }
+// })
 
 const App = () => {
     return (

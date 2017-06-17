@@ -72,7 +72,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
+
 
 var _newentry = __webpack_require__(186);
 
@@ -84,18 +84,26 @@ var _todolist2 = _interopRequireDefault(_todolist);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// var apiUrl = __dirname + 'api/todos/test';
+
+// // get api
+
+// $.ajax({
+//   url: apiUrl,
+//   type: 'GET',
+//   contentType: 'application/json',
+//   success: function(data) {
+//     console.log(data)
+//   },
+//   error: function() {
+
+//   }
+// })
+
 //dont need these, imported it in index.html using script tags
 //import React from 'react';
 //import ReactDOM from 'react-dom';
 //import $ from 'jquery';
-var apiUrl = __dirname + 'api/todos/test';
-
-// get api
-
-$.getJSON(apiUrl, function (data) {
-  console.log(data);
-});
-
 var App = function App() {
   return React.createElement(
     'div',
@@ -110,7 +118,6 @@ var App = function App() {
 };
 
 ReactDOM.render(React.createElement(App, null), document.querySelector('.container'));
-/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
 
@@ -131,15 +138,57 @@ module.exports = __webpack_require__(0);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 // dont need to import babel. already imported in index.html
 
-var NewEntry = function NewEntry() {
-  return React.createElement(
-    "div",
-    null,
-    "Hi from NewEntry"
-  );
-};
+var NewEntry = function (_React$Component) {
+  _inherits(NewEntry, _React$Component);
+
+  function NewEntry() {
+    _classCallCheck(this, NewEntry);
+
+    return _possibleConstructorReturn(this, (NewEntry.__proto__ || Object.getPrototypeOf(NewEntry)).call(this));
+  }
+
+  _createClass(NewEntry, [{
+    key: "onButtonClick",
+    value: function onButtonClick(event) {
+      event.preventDefault();
+      console.log($(".entrybox").val());
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return React.createElement(
+        "form",
+        null,
+        "New Entry: ",
+        React.createElement("input", { type: "text", className: "entrybox" }),
+        React.createElement(
+          "button",
+          { onClick: function onClick(event) {
+              return _this2.onButtonClick(event);
+            } },
+          " Submit "
+        )
+      );
+    }
+  }]);
+
+  return NewEntry;
+}(React.Component);
+
+;
 
 exports.default = NewEntry;
 
