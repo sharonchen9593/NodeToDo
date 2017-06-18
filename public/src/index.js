@@ -49,6 +49,7 @@ class App extends React.Component {
     return (
       <div>
         <NewEntry getData = {this.getData.bind(this)}/>
+        <br />
         <ul>
           <TodoList todos = {this.state.data} getData = {this.getData.bind(this)}/>
         </ul>

@@ -151,6 +151,7 @@ var App = function (_React$Component) {
         'div',
         null,
         React.createElement(_newentry2.default, { getData: this.getData.bind(this) }),
+        React.createElement('br', null),
         React.createElement(
           'ul',
           null,

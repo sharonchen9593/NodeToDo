@@ -1,0 +1,30 @@
+body {
+  background-color: #ccfff2;
+  text-align: center;
+
+}
+
+h1 {
+  margin: 50px;
+}
+
+.container {
+  margin: 30px auto;
+  width: 30%;
+  padding: 50px;
+
+}
+
+ul {
+  display: inline-block;
+  background-color: white;
+  text-align: left;
+  padding: 30px 30px 30px 50px;
+}
+
+form {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  display: inline-block;
+}
