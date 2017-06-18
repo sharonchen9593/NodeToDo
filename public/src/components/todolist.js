@@ -2,7 +2,6 @@ import TodoEntries from './todoentries';
 
 const TodoList = (props) => {
 
-  console.log(props.todos)
   if (props.todos.length>0) {
     return (
       <div>

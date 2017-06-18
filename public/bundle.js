@@ -150,9 +150,9 @@ var App = function (_React$Component) {
       return React.createElement(
         'div',
         null,
-        React.createElement(_newentry2.default, null),
+        React.createElement(_newentry2.default, { getData: this.getData.bind(this) }),
         React.createElement(
-          'div',
+          'ul',
           null,
           React.createElement(_todolist2.default, { todos: this.state.data, getData: this.getData.bind(this) })
         )
@@ -180,7 +180,7 @@ module.exports = __webpack_require__(0);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(__dirname) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -199,22 +199,37 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var NewEntry = function (_React$Component) {
   _inherits(NewEntry, _React$Component);
 
-  function NewEntry() {
+  function NewEntry(props) {
     _classCallCheck(this, NewEntry);
 
-    return _possibleConstructorReturn(this, (NewEntry.__proto__ || Object.getPrototypeOf(NewEntry)).call(this));
+    return _possibleConstructorReturn(this, (NewEntry.__proto__ || Object.getPrototypeOf(NewEntry)).call(this, props));
   }
 
   _createClass(NewEntry, [{
     key: "onButtonClick",
     value: function onButtonClick(event) {
+      var _this2 = this;
+
       event.preventDefault();
-      console.log($(".entrybox").val());
+      var newItem = $(".entrybox").val();
+      $.ajax({
+        url: __dirname + "api/todo",
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ todo: newItem, isDone: false, hasAttachment: false }),
+        success: function success(data) {
+          _this2.props.getData();
+          $(".entrybox").val('');
+        },
+        error: function error() {
+          console.log("error deleting");
+        }
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return React.createElement(
         "form",
@@ -224,7 +239,7 @@ var NewEntry = function (_React$Component) {
         React.createElement(
           "button",
           { onClick: function onClick(event) {
-              return _this2.onButtonClick(event);
+              return _this3.onButtonClick(event);
             } },
           " Submit "
         )
@@ -238,6 +253,7 @@ var NewEntry = function (_React$Component) {
 ;
 
 exports.default = NewEntry;
+/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
 
@@ -259,7 +275,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var TodoList = function TodoList(props) {
 
-  console.log(props.todos);
   if (props.todos.length > 0) {
     return React.createElement(
       'div',
@@ -299,21 +314,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var deleteAPI = __dirname + "api/todo";
-console.log(__dirname);
-
 var TodoEntries = function (_React$Component) {
   _inherits(TodoEntries, _React$Component);
 
   function TodoEntries(props) {
     _classCallCheck(this, TodoEntries);
 
-    var _this = _possibleConstructorReturn(this, (TodoEntries.__proto__ || Object.getPrototypeOf(TodoEntries)).call(this, props));
-
-    _this.state = {
-      delete: false
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (TodoEntries.__proto__ || Object.getPrototypeOf(TodoEntries)).call(this, props));
   }
 
   _createClass(TodoEntries, [{
@@ -324,12 +331,11 @@ var TodoEntries = function (_React$Component) {
       var complete = confirm("remove " + this.props.todo.todo + " from list?");
       if (complete) {
         $.ajax({
-          url: deleteAPI,
+          url: __dirname + "api/todo",
           type: 'DELETE',
           contentType: 'application/json',
           data: JSON.stringify({ id: this.props.todo._id }),
           success: function success(data) {
-            _this2.setState({ delete: true });
             _this2.props.getData();
           },
           error: function error() {
@@ -345,9 +351,8 @@ var TodoEntries = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      console.log(this.props.todo);
       return React.createElement(
-        "div",
+        "li",
         { onClick: function onClick() {
             return _this3.complete();
           } },

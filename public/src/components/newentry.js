@@ -2,13 +2,26 @@
 
 class NewEntry extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
   }
 
   onButtonClick(event) {
     event.preventDefault()
-    console.log($(".entrybox").val())
+    var newItem = $(".entrybox").val()
+    $.ajax({
+        url: __dirname + "api/todo",
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({todo: newItem, isDone: false, hasAttachment:false}),
+        success: (data) => {
+          this.props.getData()
+          $(".entrybox").val('')
+        },
+        error: () => {
+          console.log("error deleting")
+        }
+      })
   }
 
   render() {

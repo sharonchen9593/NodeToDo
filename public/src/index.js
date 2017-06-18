@@ -48,10 +48,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NewEntry />
-        <div>
+        <NewEntry getData = {this.getData.bind(this)}/>
+        <ul>
           <TodoList todos = {this.state.data} getData = {this.getData.bind(this)}/>
-        </div>
+        </ul>
       </div>
     );
   }
