@@ -97,7 +97,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var apiUrl = __dirname + 'api/todos/test';
-
 // get api
 
 
@@ -155,7 +154,7 @@ var App = function (_React$Component) {
         React.createElement(
           'div',
           null,
-          React.createElement(_todolist2.default, { todos: this.state.data })
+          React.createElement(_todolist2.default, { todos: this.state.data, getData: this.getData.bind(this) })
         )
       );
     }
@@ -266,7 +265,7 @@ var TodoList = function TodoList(props) {
       'div',
       null,
       props.todos.map(function (todo) {
-        return React.createElement(_todoentries2.default, { todo: todo, key: todo._id });
+        return React.createElement(_todoentries2.default, { todo: todo, key: todo._id, getData: props.getData });
       })
     );
   } else {
@@ -286,22 +285,84 @@ exports.default = TodoList;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(__dirname) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var TodoEntries = function TodoEntries(props) {
-  console.log(props.todo);
-  return React.createElement(
-    "div",
-    null,
-    props.todo.todo
-  );
-};
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var deleteAPI = __dirname + "api/todo";
+console.log(__dirname);
+
+var TodoEntries = function (_React$Component) {
+  _inherits(TodoEntries, _React$Component);
+
+  function TodoEntries(props) {
+    _classCallCheck(this, TodoEntries);
+
+    var _this = _possibleConstructorReturn(this, (TodoEntries.__proto__ || Object.getPrototypeOf(TodoEntries)).call(this, props));
+
+    _this.state = {
+      delete: false
+    };
+    return _this;
+  }
+
+  _createClass(TodoEntries, [{
+    key: "complete",
+    value: function complete() {
+      var _this2 = this;
+
+      var complete = confirm("remove " + this.props.todo.todo + " from list?");
+      if (complete) {
+        $.ajax({
+          url: deleteAPI,
+          type: 'DELETE',
+          contentType: 'application/json',
+          data: JSON.stringify({ id: this.props.todo._id }),
+          success: function success(data) {
+            _this2.setState({ delete: true });
+            _this2.props.getData();
+          },
+          error: function error() {
+            console.log("error deleting");
+          }
+        });
+      } else {
+        console.log("keep");
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      console.log(this.props.todo);
+      return React.createElement(
+        "div",
+        { onClick: function onClick() {
+            return _this3.complete();
+          } },
+        this.props.todo.todo
+      );
+    }
+  }]);
+
+  return TodoEntries;
+}(React.Component);
+
+;
 
 exports.default = TodoEntries;
+/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ })
 

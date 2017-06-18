@@ -6,7 +6,6 @@ import NewEntry from './components/newentry';
 import TodoList from './components/todolist'
 
 var apiUrl = __dirname + 'api/todos/test';
-
 // get api
 
 
@@ -51,7 +50,7 @@ class App extends React.Component {
       <div>
         <NewEntry />
         <div>
-          <TodoList todos = {this.state.data}/>
+          <TodoList todos = {this.state.data} getData = {this.getData.bind(this)}/>
         </div>
       </div>
     );
