@@ -5,31 +5,57 @@
 import NewEntry from './components/newentry';
 import TodoList from './components/todolist'
 
-// var apiUrl = __dirname + 'api/todos/test';
+var apiUrl = __dirname + 'api/todos/test';
 
-// // get api
+// get api
 
-// $.ajax({
-//   url: apiUrl,
-//   type: 'GET',
-//   contentType: 'application/json',
-//   success: function(data) {
-//     console.log(data)
-//   },
-//   error: function() {
 
-//   }
-// })
+class App extends React.Component {
 
-const App = () => {
+  constructor(){
+    super()
+
+    this.state = {
+      data: []
+    }
+  }
+
+  componentDidMount() {
+    this.getData()
+  }
+
+  getData() {
+    return (
+      // $.getJSON(apiUrl)
+      // .then((data) => {
+      //   this.setState({ data: data })
+      // })
+      $.ajax({
+        url: apiUrl,
+        type: 'GET',
+        contentType: 'application/json',
+        success: (data) => {
+          this.setState({
+            data: data
+          })
+        },
+        error: () => {
+          console.log("error getting")
+        }
+      })
+    )
+  }
+
+  render() {
     return (
       <div>
         <NewEntry />
         <div>
-          <TodoList />
+          <TodoList todos = {this.state.data}/>
         </div>
       </div>
     );
+  }
 }
 
 ReactDOM.render(<App />, document.querySelector('.container'))

@@ -72,7 +72,9 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _newentry = __webpack_require__(186);
 
@@ -84,40 +86,86 @@ var _todolist2 = _interopRequireDefault(_todolist);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// var apiUrl = __dirname + 'api/todos/test';
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// // get api
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-// $.ajax({
-//   url: apiUrl,
-//   type: 'GET',
-//   contentType: 'application/json',
-//   success: function(data) {
-//     console.log(data)
-//   },
-//   error: function() {
-
-//   }
-// })
-
-//dont need these, imported it in index.html using script tags
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //dont need these, imported it in index.html using script tags
 //import React from 'react';
 //import ReactDOM from 'react-dom';
 //import $ from 'jquery';
-var App = function App() {
-  return React.createElement(
-    'div',
-    null,
-    React.createElement(_newentry2.default, null),
-    React.createElement(
-      'div',
-      null,
-      React.createElement(_todolist2.default, null)
-    )
-  );
-};
+
+
+var apiUrl = __dirname + 'api/todos/test';
+
+// get api
+
+
+var App = function (_React$Component) {
+  _inherits(App, _React$Component);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+    _this.state = {
+      data: []
+    };
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getData();
+    }
+  }, {
+    key: 'getData',
+    value: function getData() {
+      var _this2 = this;
+
+      return (
+        // $.getJSON(apiUrl)
+        // .then((data) => {
+        //   this.setState({ data: data })
+        // })
+        $.ajax({
+          url: apiUrl,
+          type: 'GET',
+          contentType: 'application/json',
+          success: function success(data) {
+            _this2.setState({
+              data: data
+            });
+          },
+          error: function error() {
+            console.log("error getting");
+          }
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(_newentry2.default, null),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(_todolist2.default, { todos: this.state.data })
+        )
+      );
+    }
+  }]);
+
+  return App;
+}(React.Component);
 
 ReactDOM.render(React.createElement(App, null), document.querySelector('.container'));
+/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
 
@@ -211,12 +259,23 @@ var _todoentries2 = _interopRequireDefault(_todoentries);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TodoList = function TodoList(props) {
-  return React.createElement(
-    'div',
-    null,
-    'Hi from TodoList',
-    React.createElement(_todoentries2.default, null)
-  );
+
+  console.log(props.todos);
+  if (props.todos.length > 0) {
+    return React.createElement(
+      'div',
+      null,
+      props.todos.map(function (todo) {
+        return React.createElement(_todoentries2.default, { todo: todo, key: todo._id });
+      })
+    );
+  } else {
+    return React.createElement(
+      'div',
+      null,
+      'empty'
+    );
+  }
 };
 
 exports.default = TodoList;
@@ -233,11 +292,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var TodoEntries = function TodoEntries() {
+var TodoEntries = function TodoEntries(props) {
+  console.log(props.todo);
   return React.createElement(
     "div",
     null,
-    "Hi from TodoEntries"
+    props.todo.todo
   );
 };
 

@@ -1,6 +1,7 @@
 
-var TodoEntries = () => {
-  return <div>Hi from TodoEntries</div>;
+var TodoEntries = (props) => {
+  console.log(props.todo)
+  return <div>{props.todo.todo}</div>;
 };
 
 

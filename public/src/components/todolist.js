@@ -1,12 +1,24 @@
 import TodoEntries from './todoentries';
 
-var TodoList = (props) => {
-  return (
-    <div>
-      Hi from TodoList
-      <TodoEntries />
-    </div>
-    );
+const TodoList = (props) => {
+
+  console.log(props.todos)
+  if (props.todos.length>0) {
+    return (
+      <div>
+        {props.todos.map( todo =>
+            <TodoEntries todo = {todo} key = {todo._id}/>
+          )}
+      </div>
+      );
+
+  } else {
+    return (
+      <div>
+        empty
+      </div>
+    )
+  }
 };
 
 
