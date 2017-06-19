@@ -345,7 +345,9 @@ var _todoentries2 = _interopRequireDefault(_todoentries);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TodoList = function TodoList(props) {
-
+  var user = props.user.split('');
+  user[0] = user[0].toUpperCase();
+  user = user.join('');
   if (props.todos.length > 0) {
     return React.createElement(
       'div',
@@ -353,7 +355,7 @@ var TodoList = function TodoList(props) {
       React.createElement(
         'h2',
         null,
-        props.user,
+        user,
         '\'s To Do List: '
       ),
       props.todos.map(function (todo) {
@@ -367,7 +369,7 @@ var TodoList = function TodoList(props) {
       React.createElement(
         'h2',
         null,
-        props.user,
+        user,
         '\'s To Do List: '
       ),
       React.createElement(
