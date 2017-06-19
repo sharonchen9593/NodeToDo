@@ -60,14 +60,19 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
+<<<<<<< HEAD
 /******/ 	__webpack_require__.p = "/public";
+=======
+/******/ 	__webpack_require__.p = "";
+>>>>>>> 63a39de1129156aeab29ada6101f42ed87dee326
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75,11 +80,11 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _newentry = __webpack_require__(1);
+var _newentry = __webpack_require__(186);
 
 var _newentry2 = _interopRequireDefault(_newentry);
 
-var _todolist = __webpack_require__(3);
+var _todolist = __webpack_require__(187);
 
 var _todolist2 = _interopRequireDefault(_todolist);
 
@@ -173,7 +178,16 @@ $(function () {
 /* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
-/* 1 */
+
+/***/ 1:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(0);
+
+
+/***/ }),
+
+/***/ 186:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -254,7 +268,47 @@ exports.default = NewEntry;
 /* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
-/* 2 */
+
+/***/ 187:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _todoentries = __webpack_require__(188);
+
+var _todoentries2 = _interopRequireDefault(_todoentries);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TodoList = function TodoList(props) {
+
+  if (props.todos.length > 0) {
+    return React.createElement(
+      'div',
+      null,
+      props.todos.map(function (todo) {
+        return React.createElement(_todoentries2.default, { todo: todo, key: todo._id, getData: props.getData });
+      })
+    );
+  } else {
+    return React.createElement(
+      'div',
+      null,
+      'empty'
+    );
+  }
+};
+
+exports.default = TodoList;
+
+/***/ }),
+
+/***/ 188:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -327,6 +381,7 @@ var TodoEntries = function (_React$Component) {
 exports.default = TodoEntries;
 /* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
+<<<<<<< HEAD
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -388,5 +443,8 @@ exports.default = TodoList;
 module.exports = __webpack_require__(0);
 
 
+=======
+>>>>>>> 63a39de1129156aeab29ada6101f42ed87dee326
 /***/ })
-/******/ ]);
+
+/******/ });
