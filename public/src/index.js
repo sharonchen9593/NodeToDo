@@ -9,7 +9,7 @@ $(function() {
 
 var user = prompt("Username (click cancel to view as anonymous): ")
 if (!user) {
-  user = 'test';
+  user = 'anonymous';
 }
 user = user.toLowerCase()
 var apiUrl = __dirname + 'api/todos/' + user;
@@ -56,7 +56,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NewEntry getData = {this.getData.bind(this)}/>
+        <NewEntry getData = {this.getData.bind(this)} user = {user}/>
         <br />
         <ul>
           <TodoList todos = {this.state.data} getData = {this.getData.bind(this)} user = {user}/>

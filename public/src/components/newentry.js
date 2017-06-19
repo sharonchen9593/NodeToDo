@@ -13,8 +13,9 @@ class NewEntry extends React.Component {
         url: __dirname + "api/todo",
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({todo: newItem, isDone: false, hasAttachment:false}),
+        data: JSON.stringify({username: this.props.user, todo: newItem, isDone: false, hasAttachment:false}),
         success: (data) => {
+          console.log(data)
           this.props.getData()
           $(".entrybox").val('')
         },

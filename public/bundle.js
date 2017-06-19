@@ -99,7 +99,7 @@ $(function () {
 
   var user = prompt("Username (click cancel to view as anonymous): ");
   if (!user) {
-    user = 'test';
+    user = 'anonymous';
   }
   user = user.toLowerCase();
   var apiUrl = __dirname + 'api/todos/' + user;
@@ -154,7 +154,7 @@ $(function () {
         return React.createElement(
           'div',
           null,
-          React.createElement(_newentry2.default, { getData: this.getData.bind(this) }),
+          React.createElement(_newentry2.default, { getData: this.getData.bind(this), user: user }),
           React.createElement('br', null),
           React.createElement(
             'ul',
@@ -213,8 +213,9 @@ var NewEntry = function (_React$Component) {
         url: __dirname + "api/todo",
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({ todo: newItem, isDone: false, hasAttachment: false }),
+        data: JSON.stringify({ username: this.props.user, todo: newItem, isDone: false, hasAttachment: false }),
         success: function success(data) {
+          console.log(data);
           _this2.props.getData();
           $(".entrybox").val('');
         },
