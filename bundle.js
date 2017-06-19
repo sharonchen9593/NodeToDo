@@ -89,87 +89,87 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //dont need these, imported it in index.html using script tags
+//import React from 'react';
+//import ReactDOM from 'react-dom';
+//import $ from 'jquery';
 
-$(function () {
-  //dont need these, imported it in index.html using script tags
-  //import React from 'react';
-  //import ReactDOM from 'react-dom';
-  //import $ from 'jquery';
 
-  var user = prompt("Username (click cancel to view as anonymous): ");
-  if (!user) {
-    user = 'test';
+var apiUrl = __dirname + 'api/todos/test';
+// get api
+
+
+var App = function (_React$Component) {
+  _inherits(App, _React$Component);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+    _this.state = {
+      data: []
+    };
+    return _this;
   }
-  user = user.toLowerCase();
-  var apiUrl = __dirname + 'api/todos/' + user;
 
-  var App = function (_React$Component) {
-    _inherits(App, _React$Component);
-
-    function App() {
-      _classCallCheck(this, App);
-
-      var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
-
-      _this.state = {
-        data: []
-      };
-      return _this;
+  _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getData();
     }
+  }, {
+    key: 'getData',
+    value: function getData() {
+      var _this2 = this;
 
-    _createClass(App, [{
-      key: 'componentDidMount',
-      value: function componentDidMount() {
-        this.getData();
-      }
-    }, {
-      key: 'getData',
-      value: function getData() {
-        var _this2 = this;
-
-        return (
-          // $.getJSON(apiUrl)
-          // .then((data) => {
-          //   this.setState({ data: data })
-          // })
-          $.ajax({
-            url: apiUrl,
-            type: 'GET',
-            contentType: 'application/json',
-            success: function success(data) {
-              _this2.setState({
-                data: data
-              });
-            },
-            error: function error() {
-              console.log("error getting");
-            }
-          })
-        );
-      }
-    }, {
-      key: 'render',
-      value: function render() {
-        return React.createElement(
+      var user = prompt("Select username (not case-sensitive): ");
+      return (
+        // $.getJSON(apiUrl)
+        // .then((data) => {
+        //   this.setState({ data: data })
+        // })
+        $.ajax({
+          url: apiUrl,
+          type: 'GET',
+          contentType: 'application/json',
+          success: function success(data) {
+            _this2.setState({
+              data: data
+            });
+          },
+          error: function error() {
+            console.log("error getting");
+          }
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(_newentry2.default, { getData: this.getData.bind(this) }),
+        React.createElement('br', null),
+        React.createElement(
           'div',
           null,
-          React.createElement(_newentry2.default, { getData: this.getData.bind(this) }),
-          React.createElement('br', null),
-          React.createElement(
-            'ul',
-            null,
-            React.createElement(_todolist2.default, { todos: this.state.data, getData: this.getData.bind(this), user: user })
-          )
-        );
-      }
-    }]);
+          'hi'
+        ),
+        React.createElement(
+          'ul',
+          null,
+          React.createElement(_todolist2.default, { todos: this.state.data, getData: this.getData.bind(this) })
+        )
+      );
+    }
+  }]);
 
-    return App;
-  }(React.Component);
+  return App;
+}(React.Component);
 
-  ReactDOM.render(React.createElement(App, null), document.querySelector('.container'));
-});
+ReactDOM.render(React.createElement(App, null), document.querySelector('.container'));
 /* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
@@ -231,7 +231,7 @@ var NewEntry = function (_React$Component) {
       return React.createElement(
         "form",
         null,
-        "New Entry: ",
+        "New Entry: :D ",
         React.createElement("input", { type: "text", className: "entrybox" }),
         React.createElement(
           "button",
@@ -349,12 +349,6 @@ var TodoList = function TodoList(props) {
     return React.createElement(
       'div',
       null,
-      React.createElement(
-        'h2',
-        null,
-        props.user,
-        '\'s To Do List: '
-      ),
       props.todos.map(function (todo) {
         return React.createElement(_todoentries2.default, { todo: todo, key: todo._id, getData: props.getData });
       })
@@ -363,17 +357,7 @@ var TodoList = function TodoList(props) {
     return React.createElement(
       'div',
       null,
-      React.createElement(
-        'h2',
-        null,
-        props.user,
-        '\'s To Do List: '
-      ),
-      React.createElement(
-        'li',
-        null,
-        'empty'
-      )
+      'empty'
     );
   }
 };

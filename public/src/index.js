@@ -1,12 +1,19 @@
+import NewEntry from './components/newentry';
+import TodoList from './components/todolist';
+
+$(function() {
 //dont need these, imported it in index.html using script tags
 //import React from 'react';
 //import ReactDOM from 'react-dom';
 //import $ from 'jquery';
-import NewEntry from './components/newentry';
-import TodoList from './components/todolist'
 
-var apiUrl = __dirname + 'api/todos/test';
-// get api
+var user = prompt("Username (click cancel to view as anonymous): ")
+if (!user) {
+  user = 'test';
+}
+user = user.toLowerCase()
+var apiUrl = __dirname + 'api/todos/' + user;
+
 
 
 class App extends React.Component {
@@ -24,6 +31,7 @@ class App extends React.Component {
   }
 
   getData() {
+
     return (
       // $.getJSON(apiUrl)
       // .then((data) => {
@@ -51,7 +59,7 @@ class App extends React.Component {
         <NewEntry getData = {this.getData.bind(this)}/>
         <br />
         <ul>
-          <TodoList todos = {this.state.data} getData = {this.getData.bind(this)}/>
+          <TodoList todos = {this.state.data} getData = {this.getData.bind(this)} user = {user}/>
         </ul>
       </div>
     );
@@ -59,3 +67,6 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.querySelector('.container'))
+
+
+})
